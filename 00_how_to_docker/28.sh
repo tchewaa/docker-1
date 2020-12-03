@@ -1,0 +1,2 @@
+#creates service called marines on a network called overmind with 2 replicas
+docker service create -d --name marines --network overmind --replicas 2 -e OC_USERNAME=root -e OC_PASSWD=root 42school/marine-squad
