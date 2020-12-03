@@ -1,5 +1,5 @@
 # Ruby container
-FROM ruby:2.3.1
+FROM ruby:latest
 
 # Install rails and create the rails application path.
 RUN					apt-get update -y
@@ -16,8 +16,9 @@ ONBUILD WORKDIR /opt/app
 ONBUILD EXPOSE		3000
 
 # Install all of the required gems
-ONBUILD RUN			bundle install --without production
+ONBUILD RUN bundle update --bundler
+ONBUILD RUN	bundle install --without production
 
 # Runs migrations that have not run yet and runs the db/seed.rb file.
-ONBUILD RUN rake db:migrate
-ONBUILD RUN rake db:seed
+ONBUILD RUN bundle exec rake db:migrate
+ONBUILD RUN bundle exec rake db:seed
